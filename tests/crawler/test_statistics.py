@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from feedsearch_crawler.crawler.statistics import (
+from berga_crawler.crawler.statistics import (
     ErrorCategory,
     PercentileTracker,
     StatisticsLevel,

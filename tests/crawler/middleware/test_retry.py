@@ -2,10 +2,10 @@
 
 import pytest
 
-from feedsearch_crawler.crawler.middleware.retry import RetryMiddleware
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
-from feedsearch_crawler.crawler.exceptions import RetryRequestException
+from berga_crawler.crawler.middleware.retry import RetryMiddleware
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
+from berga_crawler.crawler.exceptions import RetryRequestException
 from yarl import URL
 
 

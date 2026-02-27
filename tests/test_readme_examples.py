@@ -9,18 +9,18 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from yarl import URL
 
-from feedsearch_crawler import output_opml, search, search_async
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler import output_opml, search, search_async
+from berga_crawler.feed_spider.feed_info import FeedInfo
 
 
 class TestReadmeBasicUsage:
     """Test examples from README Usage section."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_readme_basic_example_structure(self, mock_search_async):
         """Test README basic usage example (lines 33-42).
 
-        >>> from feedsearch_crawler import search
+        >>> from berga_crawler import search
         >>> feeds = search('xkcd.com')
         >>> feeds
         [FeedInfo('https://xkcd.com/rss.xml'), FeedInfo('https://xkcd.com/atom.xml')]
@@ -44,7 +44,7 @@ class TestReadmeBasicUsage:
         # Verify feeds have url attribute
         assert hasattr(feeds[0], "url")
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_readme_url_attribute_example(self, mock_search_async):
         """Test README URL attribute example (lines 37-40).
 
@@ -67,7 +67,7 @@ class TestReadmeBasicUsage:
         assert str(feeds[0].url) == "https://xkcd.com/rss.xml"
         assert isinstance(str(feeds[0].url), str)
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_readme_serialize_example(self, mock_search_async):
         """Test README serialize example (line 41-42).
 
@@ -136,10 +136,10 @@ class TestReadmeAsyncUsage:
     async def test_readme_search_async_example(self):
         """Test README search_async example (lines 47-50).
 
-        from feedsearch_crawler import search_async
+        from berga_crawler import search_async
         feeds = await search_async('xkcd.com')
         """
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = AsyncMock()
             mock_spider.items = [
                 FeedInfo(
@@ -162,7 +162,7 @@ class TestReadmeOutputFunctions:
     def test_readme_opml_example(self):
         """Test README OPML example (lines 67-69).
 
-        from feedsearch_crawler import output_opml
+        from berga_crawler import output_opml
         output_opml(feeds).decode()
         """
         feeds = [
@@ -192,7 +192,7 @@ class TestReadmeOutputFunctions:
 class TestReadmeSearchArguments:
     """Test search arguments from README."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_readme_search_arguments(self, mock_search_async):
         """Test that search accepts all documented arguments (lines 77-90)."""
         mock_search_async.return_value = []
@@ -222,7 +222,7 @@ class TestReadmeSearchArguments:
     @pytest.mark.asyncio
     async def test_readme_search_async_arguments(self):
         """Test that search_async accepts all documented arguments."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = AsyncMock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -332,7 +332,7 @@ class TestReadmeFeedInfoValues:
 class TestReadmeReturnValues:
     """Test return values match README documentation."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_returns_list_of_feedinfo(self, mock_search_async):
         """Test README claim: 'search will always return a list of FeedInfo objects' (line 53)."""
         mock_feeds = [FeedInfo(url=URL("https://example.com/feed.xml"))]
@@ -347,7 +347,7 @@ class TestReadmeReturnValues:
         # Must contain FeedInfo objects
         assert all(isinstance(item, FeedInfo) for item in result)
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_feedinfo_always_has_url_property(self, mock_search_async):
         """Test README claim: 'each will always have a url property' (line 53)."""
         mock_feeds = [
@@ -366,7 +366,7 @@ class TestReadmeReturnValues:
 
     def test_feeds_sorted_by_score(self):
         """Test README claim: 'sorted by score value from highest to lowest' (line 54)."""
-        from feedsearch_crawler import sort_urls
+        from berga_crawler import sort_urls
 
         # Create unsorted feeds
         unsorted_feeds = [

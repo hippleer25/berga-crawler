@@ -1,9 +1,9 @@
 from yarl import URL
 
-from feedsearch_crawler.feed_spider.link_filter import (
+from berga_crawler.feed_spider.link_filter import (
     LinkFilter as lf,
 )
-from feedsearch_crawler.feed_spider.regexes import feedlike_regex, podcast_regex
+from berga_crawler.feed_spider.regexes import feedlike_regex, podcast_regex
 
 
 def test_feedlike_regex() -> None:

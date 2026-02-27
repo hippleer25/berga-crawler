@@ -3,9 +3,9 @@
 from bs4 import BeautifulSoup
 from yarl import URL
 
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
-from feedsearch_crawler.feed_spider.link_filter import LinkFilter
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
+from berga_crawler.feed_spider.link_filter import LinkFilter
 
 
 class TestLinkFilterURLPatterns:
@@ -482,7 +482,7 @@ class TestHelperMethods:
         request = Request(url=URL("https://example.com"))
         filter = LinkFilter(response, request)
 
-        from feedsearch_crawler.feed_spider.regexes import feedlike_regex
+        from berga_crawler.feed_spider.regexes import feedlike_regex
 
         assert filter.is_href_matching("/rss", feedlike_regex) is True
         assert filter.is_href_matching("/about", feedlike_regex) is False

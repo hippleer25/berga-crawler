@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler.item import Item
-from feedsearch_crawler.crawler.lib import Stats
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
+from berga_crawler.crawler.item import Item
+from berga_crawler.crawler.lib import Stats
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
 from tests.conftest import MockCrawler
 
 
@@ -264,7 +264,7 @@ class TestCrawlerWorkflow:
                     mock_session.closed = False
 
                     # Create a mock request queue
-                    from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                    from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                     mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                     mock_queue.join = AsyncMock()
@@ -290,7 +290,7 @@ class TestCrawlerWorkflow:
                 mock_session.closed = False
 
                 # Create a mock request queue
-                from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                 mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                 mock_queue.join = AsyncMock()
@@ -318,7 +318,7 @@ class TestCrawlerStatistics:
         crawler = MockCrawler()
 
         # Check that all stat keys are initialized
-        from feedsearch_crawler.crawler.lib import Stats
+        from berga_crawler.crawler.lib import Stats
 
         for stat in Stats:
             assert stat in crawler.stats
@@ -346,7 +346,7 @@ class TestCrawlerStatistics:
         await crawler.stats_collector.stop()
         crawler.record_statistics()
 
-        from feedsearch_crawler.crawler.lib import Stats
+        from berga_crawler.crawler.lib import Stats
 
         # Check that statistics were calculated
         assert crawler.stats[Stats.CONTENT_LENGTH_TOTAL] == 4500
@@ -410,7 +410,7 @@ class TestCrawlerCallbackHandling:
         crawler = MockCrawler()
 
         # Create a deeply nested callback result that would cause recursion
-        from feedsearch_crawler.crawler.queueable import CallbackResult
+        from berga_crawler.crawler.queueable import CallbackResult
 
         deep_result = CallbackResult(MockItem("test"), callback_recursion=20)
 

@@ -38,7 +38,7 @@ pip install feedsearch-crawler
 Feedsearch Crawler is called with the single function ``search``:
 
 ``` python
->>> from feedsearch_crawler import search
+>>> from berga_crawler import search
 >>> feeds = search('xkcd.com')
 >>> feeds
 [FeedInfo('https://xkcd.com/rss.xml'), FeedInfo('https://xkcd.com/atom.xml')]
@@ -53,7 +53,7 @@ URL('https://xkcd.com/rss.xml')
 If you are already running in an [asyncio event loop](https://docs.python.org/3/library/asyncio-eventloop.html), then you can import and await ``search_async`` instead. The ``search`` function is only a wrapper that runs ``search_async`` in a new asyncio event loop.
 
 ``` python
-from feedsearch_crawler import search_async
+from berga_crawler import search_async
 
 feeds = await search_async('xkcd.com')
 ```
@@ -66,7 +66,7 @@ The returned *FeedInfo* are sorted by the *score* value from highest to lowest, 
 If you need detailed error information when a URL fails to load (DNS errors, SSL errors, HTTP errors, timeouts, etc.), use ``search_with_info`` or ``search_async_with_info`` instead. These functions return a ``SearchResult`` object that includes error details:
 
 ``` python
-from feedsearch_crawler import search_with_info, ErrorType
+from berga_crawler import search_with_info, ErrorType
 
 result = search_with_info('nonexistent-domain.com')
 
@@ -116,13 +116,13 @@ The crawl logs can be accessed with:
 ``` python
 import logging
 
-logger = logging.getLogger("feedsearch_crawler")
+logger = logging.getLogger("berga_crawler")
 ```
 
 Feedsearch Crawler also provides a handy function to output the returned feeds as an [OPML](https://en.wikipedia.org/wiki/OPML) subscription list, encoded as a UTF-8 bytestring.
 
 ``` python
-from feedsearch_crawler import output_opml
+from berga_crawler import output_opml
 
 output_opml(feeds).decode()
 ```

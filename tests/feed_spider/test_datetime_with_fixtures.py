@@ -7,7 +7,7 @@ for comprehensive datetime parsing tests.
 import pytest
 from datetime import datetime
 
-from feedsearch_crawler.feed_spider.lib import datestring_to_utc_datetime
+from berga_crawler.feed_spider.lib import datestring_to_utc_datetime
 from tests.feed_spider.datetime_test_data import (
     DATETIME_TEST_SUITE,
     DateTimeTestCase,

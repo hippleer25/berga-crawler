@@ -54,7 +54,7 @@ async def search_async_with_info(url, try_urls=False, include_stats=False, **kwa
 ### Existing Code (Still Works)
 
 ```python
-from feedsearch_crawler import search
+from berga_crawler import search
 
 # No changes required
 feeds = search("https://example.com")
@@ -68,7 +68,7 @@ if not feeds:
 ### New Code (With Error Handling)
 
 ```python
-from feedsearch_crawler import search_with_info
+from berga_crawler import search_with_info
 
 result = search_with_info("https://example.com")
 
@@ -84,7 +84,7 @@ else:
 ### Error Type Handling
 
 ```python
-from feedsearch_crawler import search_with_info, ErrorType
+from berga_crawler import search_with_info, ErrorType
 
 result = search_with_info("https://nonexistent-domain.com")
 
@@ -132,7 +132,7 @@ for feed in result.feeds:
 
 Error type information is now properly stored as a `Response` class attribute rather than dynamically attached:
 
-**Response Class (src/feedsearch_crawler/crawler/response.py)**
+**Response Class (src/berga_crawler/crawler/response.py)**
 ```python
 class Response:
     def __init__(
@@ -146,7 +146,7 @@ class Response:
         self.error_type = error_type  # Proper attribute
 ```
 
-**Downloader (src/feedsearch_crawler/crawler/downloader.py)**
+**Downloader (src/berga_crawler/crawler/downloader.py)**
 ```python
 # Downloader passes error_type as constructor parameter
 except aiohttp.ClientConnectorDNSError:
@@ -157,7 +157,7 @@ except aiohttp.ClientConnectorDNSError:
     )
 ```
 
-**Spider (src/feedsearch_crawler/feed_spider/spider.py)**
+**Spider (src/berga_crawler/feed_spider/spider.py)**
 ```python
 # Spider reads from proper attribute
 if response.error_type == "dns_failure":
@@ -172,7 +172,7 @@ This clean architecture ensures error type information flows properly through th
 
 ### Modified Files
 
-**src/feedsearch_crawler/__init__.py** (+170 lines, -65 lines)
+**src/berga_crawler/__init__.py** (+170 lines, -65 lines)
 - Removed `include_errors` parameter from `search()` and `search_async()`
 - Restored clean `List[FeedInfo]` return type for original functions
 - Added `search_with_info()` function (synchronous)

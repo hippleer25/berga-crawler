@@ -14,8 +14,8 @@ This document analyzes the current datetime parsing implementation in feedsearch
 ### Location
 
 The datetime parsing logic is primarily located in:
-- `src/feedsearch_crawler/feed_spider/lib.py` - Core parsing functions
-- `src/feedsearch_crawler/feed_spider/feed_info_parser.py` - Feed parsing logic that uses datetime functions
+- `src/berga_crawler/feed_spider/lib.py` - Core parsing functions
+- `src/berga_crawler/feed_spider/feed_info_parser.py` - Feed parsing logic that uses datetime functions
 
 ### Current Approach
 
@@ -293,8 +293,8 @@ def datestring_to_utc_datetime(date_string: str, locale: str = 'en') -> Optional
 **Estimated Effort:** 4-6 hours
 
 **Code Changes:**
-- `src/feedsearch_crawler/feed_spider/lib.py` - Rewrite `datestring_to_utc_datetime()`
-- `src/feedsearch_crawler/feed_spider/feed_info_parser.py` - Improve error handling
+- `src/berga_crawler/feed_spider/lib.py` - Rewrite `datestring_to_utc_datetime()`
+- `src/berga_crawler/feed_spider/feed_info_parser.py` - Improve error handling
 - `tests/feed_spider/test_feed_info_parser.py` - Add datetime parsing tests
 
 ### Phase 2: Leverage feedparser's Native Dates (ENHANCEMENT)
@@ -313,7 +313,7 @@ def datestring_to_utc_datetime(date_string: str, locale: str = 'en') -> Optional
 **Estimated Effort:** 2-3 hours
 
 **Code Changes:**
-- `src/feedsearch_crawler/feed_spider/feed_info_parser.py` - Update `entry_dates()` method
+- `src/berga_crawler/feed_spider/feed_info_parser.py` - Update `entry_dates()` method
 
 ### Phase 3: Monitoring and Metrics (FUTURE)
 

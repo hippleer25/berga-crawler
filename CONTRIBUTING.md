@@ -75,7 +75,7 @@ Enhancement suggestions are welcome! Please:
    uv run pytest
 
    # Check coverage
-   uv run pytest --cov=src/feedsearch_crawler --cov-report=term-missing
+   uv run pytest --cov=src/berga_crawler --cov-report=term-missing
    ```
 
 5. **Commit your changes**:
@@ -122,7 +122,7 @@ uv run ruff format
 uv run pytest
 
 # Run tests with coverage
-uv run pytest --cov=src/feedsearch_crawler --cov-report=html
+uv run pytest --cov=src/berga_crawler --cov-report=html
 
 # Run specific test file
 uv run pytest tests/crawler/test_request.py
@@ -221,7 +221,7 @@ async def test_async_function():
 ```bash
 feedsearch-crawler/
 ├── src/
-│   └── feedsearch_crawler/
+│   └── berga_crawler/
 │       ├── crawler/          # Generic async crawler framework
 │       │   ├── middleware/   # Request/response middleware
 │       │   ├── crawler.py    # Base Crawler class

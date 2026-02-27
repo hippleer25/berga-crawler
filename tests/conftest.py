@@ -11,8 +11,8 @@ from aiohttp import web
 from aiohttp.test_utils import TestServer
 from yarl import URL
 
-from feedsearch_crawler.crawler.crawler import Crawler
-from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
+from berga_crawler.crawler.crawler import Crawler
+from berga_crawler.feed_spider.spider import FeedsearchSpider
 
 
 @pytest.fixture

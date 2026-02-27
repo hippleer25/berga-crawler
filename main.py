@@ -5,8 +5,8 @@ import time
 import os
 import argparse
 from pprint import pprint
-from feedsearch_crawler import FeedsearchSpider, output_opml, sort_urls
-from feedsearch_crawler.crawler import coerce_url
+from berga_crawler import FeedsearchSpider, output_opml, sort_urls
+from berga_crawler.crawler import coerce_url
 from datetime import datetime, timezone
 from typing import Any, List
 
@@ -200,7 +200,7 @@ if __name__ == "__main__":
         print(f"  - {url}")
     print()
 
-    logger = logging.getLogger("feedsearch_crawler")
+    logger = logging.getLogger("berga_crawler")
     logger.setLevel(logging.DEBUG)
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)

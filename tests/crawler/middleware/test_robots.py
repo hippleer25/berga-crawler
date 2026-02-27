@@ -4,9 +4,9 @@ import pytest
 from unittest.mock import patch, MagicMock
 from yarl import URL
 
-from feedsearch_crawler.crawler.middleware.robots import RobotsMiddleware
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
+from berga_crawler.crawler.middleware.robots import RobotsMiddleware
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
 
 
 class TestRobotsMiddleware:
@@ -30,7 +30,7 @@ class TestRobotsMiddleware:
 
         # Mock the RobotFileParser
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True
@@ -49,7 +49,7 @@ class TestRobotsMiddleware:
 
         # Mock the RobotFileParser to disallow the request
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = False  # Blocked
@@ -70,7 +70,7 @@ class TestRobotsMiddleware:
 
         # Mock the robots.txt fetching
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True
@@ -93,7 +93,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="TestBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True
@@ -116,7 +116,7 @@ class TestRobotsMiddleware:
 
         # Mock robots.txt fetching to fail
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.read.side_effect = Exception("Network error")
@@ -134,7 +134,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="SpecificBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
 
@@ -165,7 +165,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="TestBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True
@@ -186,7 +186,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="TestBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True
@@ -232,7 +232,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="TestBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             # Simulate malformed robots.txt parsing
@@ -251,7 +251,7 @@ class TestRobotsMiddleware:
         middleware = RobotsMiddleware(user_agent="TestBot")
 
         with patch(
-            "feedsearch_crawler.crawler.middleware.robots.RobotFileParser"
+            "berga_crawler.crawler.middleware.robots.RobotFileParser"
         ) as mock_robotparser:
             mock_rp = MagicMock()
             mock_rp.can_fetch.return_value = True  # Empty robots.txt allows everything

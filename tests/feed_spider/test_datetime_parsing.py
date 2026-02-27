@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 
 import pytest
 
-from feedsearch_crawler.feed_spider.lib import datestring_to_utc_datetime, force_utc
+from berga_crawler.feed_spider.lib import datestring_to_utc_datetime, force_utc
 
 
 class TestRFC3339Dates:

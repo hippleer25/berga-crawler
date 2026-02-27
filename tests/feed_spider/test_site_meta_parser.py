@@ -4,11 +4,11 @@ import pytest
 from bs4 import BeautifulSoup
 from yarl import URL
 
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
-from feedsearch_crawler.feed_spider.site_meta import SiteMeta
-from feedsearch_crawler.feed_spider.site_meta_parser import SiteMetaParser
-from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
+from berga_crawler.feed_spider.site_meta import SiteMeta
+from berga_crawler.feed_spider.site_meta_parser import SiteMetaParser
+from berga_crawler.feed_spider.spider import FeedsearchSpider
 
 
 @pytest.fixture

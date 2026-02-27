@@ -2,7 +2,7 @@ from datetime import datetime
 
 from dateutil.tz import tzutc
 
-from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
 
 def test_entry_velocity_no_dates() -> None:

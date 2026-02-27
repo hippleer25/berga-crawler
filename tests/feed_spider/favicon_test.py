@@ -1,4 +1,4 @@
-from feedsearch_crawler.feed_spider.favicon import Favicon
+from berga_crawler.feed_spider.favicon import Favicon
 
 
 def test_matches_host() -> None:

@@ -8,9 +8,9 @@ from aiohttp import web
 from aiohttp.test_utils import TestServer
 from yarl import URL
 
-from feedsearch_crawler.crawler.downloader import Downloader
-from feedsearch_crawler.crawler.middleware import BaseDownloaderMiddleware
-from feedsearch_crawler.crawler.request import Request
+from berga_crawler.crawler.downloader import Downloader
+from berga_crawler.crawler.middleware import BaseDownloaderMiddleware
+from berga_crawler.crawler.request import Request
 
 
 class _RecorderMiddleware(BaseDownloaderMiddleware):

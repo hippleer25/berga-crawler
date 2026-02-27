@@ -6,10 +6,10 @@ from unittest.mock import AsyncMock, patch
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler.downloader import Downloader
-from feedsearch_crawler.crawler.middleware.throttle import ThrottleMiddleware
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
+from berga_crawler.crawler.downloader import Downloader
+from berga_crawler.crawler.middleware.throttle import ThrottleMiddleware
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
 from tests.conftest import MockCrawler
 
 
@@ -31,7 +31,7 @@ class TestTCPConnectorOptimizations:
                 mock_session.closed = False
 
                 # Create a mock request queue
-                from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                 mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                 mock_queue.join = AsyncMock()
@@ -75,7 +75,7 @@ class TestTCPConnectorOptimizations:
                     mock_session.closed = False
 
                     # Create a mock request queue
-                    from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                    from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                     mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                     mock_queue.join = AsyncMock()
@@ -105,7 +105,7 @@ class TestSemaphoreOptimizations:
                 mock_session.closed = False
 
                 # Create a mock request queue
-                from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                 mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                 mock_queue.join = AsyncMock()
@@ -184,7 +184,7 @@ class TestWorkerPoolOptimizations:
                     mock_session.closed = False
 
                     # Create a mock request queue
-                    from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                    from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                     mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                     mock_queue.join = AsyncMock()
@@ -397,7 +397,7 @@ class TestPerformanceIntegration:
                 mock_session.closed = False
 
                 # Create a mock request queue for quick completion
-                from feedsearch_crawler.crawler.lib import CrawlerPriorityQueue
+                from berga_crawler.crawler.lib import CrawlerPriorityQueue
 
                 mock_queue = AsyncMock(spec=CrawlerPriorityQueue)
                 mock_queue.join = AsyncMock()

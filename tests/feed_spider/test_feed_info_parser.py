@@ -7,16 +7,16 @@ import feedparser
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler import Request, Response
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
-from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
-from feedsearch_crawler.feed_spider.lib import ParseTypes
+from berga_crawler.crawler import Request, Response
+from berga_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
+from berga_crawler.feed_spider.lib import ParseTypes
 
 
 @pytest.fixture
 def feed_parser():
     """Create a FeedInfoParser instance."""
-    from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
+    from berga_crawler.feed_spider.spider import FeedsearchSpider
 
     spider = FeedsearchSpider(concurrency=2, favicon_data_uri=False)
     parser = FeedInfoParser(crawler=spider)
@@ -263,7 +263,7 @@ class TestParseXML:
         item = FeedInfo(url=URL("https://example.com/feed.xml"))
 
         with patch(
-            "feedsearch_crawler.feed_spider.feed_info_parser.FeedInfoParser.parse_raw_data"
+            "berga_crawler.feed_spider.feed_info_parser.FeedInfoParser.parse_raw_data"
         ) as mock_parse:
             # Simulate bozo with CharacterEncodingOverride
             mock_parse.return_value = {
@@ -284,7 +284,7 @@ class TestParseXML:
         item = FeedInfo(url=URL("https://example.com/feed.xml"))
 
         with patch(
-            "feedsearch_crawler.feed_spider.feed_info_parser.FeedInfoParser.parse_raw_data"
+            "berga_crawler.feed_spider.feed_info_parser.FeedInfoParser.parse_raw_data"
         ) as mock_parse:
             mock_parse.return_value = {
                 "bozo": 1,
