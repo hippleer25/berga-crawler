@@ -44,8 +44,20 @@ class SearchResult:
 
     def serialize(self) -> Dict[str, Any]:
         """Serialize SearchResult to a JSON-compatible dictionary."""
+
+        def _json_friendly(obj):
+            if hasattr(obj, "serialize"):
+                return obj.serialize()
+            if isinstance(obj, list):
+                return [_json_friendly(i) for i in obj]
+            if isinstance(obj, dict):
+                return {str(k): _json_friendly(v) for k, v in obj.items()}
+            if hasattr(obj, "__str__") and "yarl.URL" in str(type(obj)):
+                return str(obj)
+            return obj
+
         return {
             "feeds": [f.serialize() for f in self.feeds],
-            "root_error": self.root_error.serialize() if hasattr(self.root_error, "serialize") else str(self.root_error) if self.root_error else None,
-            "stats": self.stats
+            "root_error": self.root_error.serialize() if self.root_error else None,
+            "stats": _json_friendly(self.stats) if self.stats else None,
         }
