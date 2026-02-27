@@ -41,3 +41,13 @@ class SearchError:
         if self.status_code:
             return f"{self.error_type.value}: {self.message} (HTTP {self.status_code}) - {self.url}"
         return f"{self.error_type.value}: {self.message} - {self.url}"
+
+    def serialize(self) -> dict:
+        """Serialize to dictionary."""
+        return {
+            "url": self.url,
+            "error_type": self.error_type.value,
+            "message": self.message,
+            "status_code": self.status_code,
+            "original_exception": self.original_exception
+        }
