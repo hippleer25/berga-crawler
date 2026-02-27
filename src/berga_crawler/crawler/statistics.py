@@ -314,7 +314,7 @@ class StatsCollector:
                 "category": error_category.value,
                 "message": error_message,
                 "status_code": status_code,
-                "url": url,
+                "url": str(url) if url else None,
             }
             self.recent_errors.append(error_record)
 

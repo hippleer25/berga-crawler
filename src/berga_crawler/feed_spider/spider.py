@@ -62,7 +62,8 @@ class FeedsearchSpider(Crawler):
         # If the Response is not OK then there's no data to parse.
         if not response.ok:
             # Check if this is a root URL and record error
-            is_root_url = str(request.url) in self._root_urls
+            url_str = str(request.url)
+            is_root_url = url_str in self._root_urls
             if is_root_url and not self._root_url_error:
                 # First root URL error - record it
                 self._root_url_error = self._create_error_from_response(

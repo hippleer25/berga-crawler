@@ -276,11 +276,18 @@ class Crawler(ABC):
                     callback_result = request.callback(
                         request=request, response=response, **request.cb_kwargs
                     )
-            elif not response.ok and request.failure_callback:
-                async with self._parse_semaphore:
-                    callback_result = request.failure_callback(
-                        request=request, response=response, **request.cb_kwargs
-                    )
+            elif not response.ok:
+                if request.failure_callback:
+                    async with self._parse_semaphore:
+                        callback_result = request.failure_callback(
+                            request=request, response=response, **request.cb_kwargs
+                        )
+                elif request.callback:
+                    # If no failure callback, still run main callback so it can handle errors (like root URL failures)
+                    async with self._parse_semaphore:
+                        callback_result = request.callback(
+                            request=request, response=response, **request.cb_kwargs
+                        )
 
             dur_ms = (time.perf_counter() - start) * 1000
             latency_ms = getattr(response, "latency_ms", dur_ms)
