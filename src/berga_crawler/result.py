@@ -41,3 +41,11 @@ class SearchResult:
     def __getitem__(self, index: int) -> FeedInfo:
         """Allow indexing into feeds."""
         return self.feeds[index]
+
+    def serialize(self) -> Dict[str, Any]:
+        """Serialize SearchResult to a JSON-compatible dictionary."""
+        return {
+            "feeds": [f.serialize() for f in self.feeds],
+            "root_error": self.root_error.serialize() if hasattr(self.root_error, "serialize") else str(self.root_error) if self.root_error else None,
+            "stats": self.stats
+        }
