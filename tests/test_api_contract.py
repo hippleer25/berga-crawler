@@ -9,14 +9,14 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from feedsearch_crawler import (
+from berga_crawler import (
     SearchResult,
     search,
     search_async,
     search_with_info,
     search_async_with_info,
 )
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.feed_info import FeedInfo
 
 
 class TestSearchReturnTypeContract:
@@ -26,7 +26,7 @@ class TestSearchReturnTypeContract:
     This contract ensures backward compatibility. Breaking this requires v2.0.0.
     """
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_returns_list_type(self, mock_search_async):
         """CONTRACT: search() return type must be list."""
         mock_feeds = [FeedInfo(url="https://example.com/feed.xml")]
@@ -40,7 +40,7 @@ class TestSearchReturnTypeContract:
             f"CONTRACT VIOLATION: search() must return list, got {type(result).__name__}"
         )
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_returns_list_of_feedinfo(self, mock_search_async):
         """CONTRACT: search() must return List[FeedInfo]."""
         mock_feeds = [
@@ -58,7 +58,7 @@ class TestSearchReturnTypeContract:
             "All items must be FeedInfo"
         )
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_empty_list_is_list(self, mock_search_async):
         """CONTRACT: search() returns empty list (not None, not other falsy value)."""
         mock_feeds = []
@@ -72,7 +72,7 @@ class TestSearchReturnTypeContract:
         assert result == [], "Empty result must be []"
         assert not result, "Empty list must be falsy"
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_never_returns_searchresult(self, mock_search_async):
         """CONTRACT: search() must never return SearchResult."""
         mock_feeds = []
@@ -97,7 +97,7 @@ class TestSearchAsyncReturnTypeContract:
     @pytest.mark.asyncio
     async def test_search_async_returns_list_type(self):
         """CONTRACT: search_async() return type must be list."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [FeedInfo(url="https://example.com/feed.xml")]
             mock_spider.crawl = AsyncMock()
@@ -113,7 +113,7 @@ class TestSearchAsyncReturnTypeContract:
     @pytest.mark.asyncio
     async def test_search_async_returns_list_of_feedinfo(self):
         """CONTRACT: search_async() must return List[FeedInfo]."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [
                 FeedInfo(url="https://example.com/feed1.xml"),
@@ -133,7 +133,7 @@ class TestSearchAsyncReturnTypeContract:
     @pytest.mark.asyncio
     async def test_search_async_never_returns_searchresult(self):
         """CONTRACT: search_async() must never return SearchResult."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -154,7 +154,7 @@ class TestSearchWithInfoReturnTypeContract:
     This is the new API that provides error information.
     """
 
-    @patch("feedsearch_crawler.search_async_with_info")
+    @patch("berga_crawler.search_async_with_info")
     def test_search_with_info_returns_searchresult_type(self, mock_async):
         """CONTRACT: search_with_info() return type must be SearchResult."""
         mock_result = SearchResult(feeds=[], root_error=None, stats=None)
@@ -169,7 +169,7 @@ class TestSearchWithInfoReturnTypeContract:
             f"got {type(result).__name__}"
         )
 
-    @patch("feedsearch_crawler.search_async_with_info")
+    @patch("berga_crawler.search_async_with_info")
     def test_search_with_info_never_returns_list(self, mock_async):
         """CONTRACT: search_with_info() must never return plain list."""
         mock_result = SearchResult(feeds=[], root_error=None, stats=None)
@@ -194,7 +194,7 @@ class TestSearchAsyncWithInfoReturnTypeContract:
     @pytest.mark.asyncio
     async def test_search_async_with_info_returns_searchresult_type(self):
         """CONTRACT: search_async_with_info() return type must be SearchResult."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -213,7 +213,7 @@ class TestSearchAsyncWithInfoReturnTypeContract:
     @pytest.mark.asyncio
     async def test_search_async_with_info_never_returns_list(self):
         """CONTRACT: search_async_with_info() must never return plain list."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -234,7 +234,7 @@ class TestBehaviorContract:
     CONTRACT: Behavior contracts that must be maintained.
     """
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_and_search_with_info_return_same_feeds(self, mock_search_async):
         """
         CONTRACT: search() and search_with_info() must return the same feeds list.
@@ -255,7 +255,7 @@ class TestBehaviorContract:
         # Mock for search_with_info()
         mock_result = SearchResult(feeds=mock_feeds, root_error=None, stats=None)
 
-        with patch("feedsearch_crawler.search_async_with_info") as mock_info:
+        with patch("berga_crawler.search_async_with_info") as mock_info:
             mock_info.return_value = mock_result
             with patch("asyncio.run", return_value=mock_result):
                 searchresult_result = search_with_info("https://example.com")
@@ -265,7 +265,7 @@ class TestBehaviorContract:
             "CONTRACT VIOLATION: search() and search_with_info() must return same feeds"
         )
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_respects_list_protocol(self, mock_search_async):
         """CONTRACT: search() result must support all list operations."""
         mock_feeds = [

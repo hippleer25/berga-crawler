@@ -6,10 +6,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
-from feedsearch_crawler.crawler.response import Response
-from feedsearch_crawler.crawler.request import Request
+from berga_crawler.feed_spider.spider import FeedsearchSpider
+from berga_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.crawler.response import Response
+from berga_crawler.crawler.request import Request
 
 
 class TestFeedsearchSpiderIntegration:

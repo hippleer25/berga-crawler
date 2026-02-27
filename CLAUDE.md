@@ -81,8 +81,8 @@ uv build
 
 # 5. Check build artifacts
 ls dist/
-# Should see: feedsearch_crawler-X.Y.Z-py3-none-any.whl
-#             feedsearch_crawler-X.Y.Z.tar.gz
+# Should see: berga_crawler-X.Y.Z-py3-none-any.whl
+#             berga_crawler-X.Y.Z.tar.gz
 
 # 6. Upload to TestPyPI (optional but recommended)
 uv publish --token $TEST_PYPI_TOKEN --publish-url https://test.pypi.org/legacy/
@@ -119,7 +119,7 @@ git push origin v1.0.3
 
 **feedsearch-crawler** is an asyncio-based RSS/Atom/JSON feed discovery crawler built on two main architectural layers:
 
-#### 1. Crawler Framework (`src/feedsearch_crawler/crawler/`)
+#### 1. Crawler Framework (`src/berga_crawler/crawler/`)
 
 A generic asynchronous web crawler framework providing:
 
@@ -130,7 +130,7 @@ A generic asynchronous web crawler framework providing:
 - **DuplicateFilter**: URL deduplication to avoid crawling the same resource multiple times
 - **Item/ItemParser**: Structured data extraction and processing
 
-#### 2. Feed Spider (`src/feedsearch_crawler/feed_spider/`)
+#### 2. Feed Spider (`src/berga_crawler/feed_spider/`)
 
 Specialized crawler for feed discovery built on the crawler framework:
 

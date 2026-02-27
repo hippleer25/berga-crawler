@@ -1,6 +1,6 @@
 import time
 
-from feedsearch_crawler.crawler.queueable import CallbackResult, Queueable
+from berga_crawler.crawler.queueable import CallbackResult, Queueable
 
 
 # Test Initialization

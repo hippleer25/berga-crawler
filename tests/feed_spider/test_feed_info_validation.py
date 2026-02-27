@@ -7,7 +7,7 @@ and that serialize() properly handles None URL values.
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.feed_info import FeedInfo
 
 
 class TestFeedInfoValidation:

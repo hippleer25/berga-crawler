@@ -77,7 +77,7 @@ New Queue:
 
 ### Files Modified
 
-**1. `src/feedsearch_crawler/crawler/crawler.py`**
+**1. `src/berga_crawler/crawler/crawler.py`**
 
 Added to `__init__`:
 - `respect_robots` parameter (default: True)
@@ -94,7 +94,7 @@ Modified `crawl()`:
 - Queues standard sitemap.xml requests (priority=5) **in parallel**
 - Both happen before regular URL crawling starts
 
-**2. `src/feedsearch_crawler/crawler/middleware/robots.py`**
+**2. `src/berga_crawler/crawler/middleware/robots.py`**
 
 Enhanced:
 - Added `sitemap_urls` dictionary to store discovered sitemaps
@@ -102,7 +102,7 @@ Enhanced:
 - Added `get_sitemaps_for_host()` method
 - Modified `_load_robots_txt()` to call `_extract_sitemaps()`
 
-**3. `src/feedsearch_crawler/crawler/lib.py`**
+**3. `src/berga_crawler/crawler/lib.py`**
 
 Enhanced `parse_sitemap()`:
 - Better feed URL filtering
@@ -134,7 +134,7 @@ Enhanced `parse_sitemap()`:
 
 ### Default behavior (respects robots.txt + fetches sitemaps)
 ```python
-from feedsearch_crawler import search
+from berga_crawler import search
 
 feeds = search("example.com")
 # Fetches:
@@ -254,7 +254,7 @@ Possible future improvements:
 
 - `ROBOTS_SITEMAP_IMPLEMENTATION_PLAN.md` - Detailed planning document
 - `tests/crawler/middleware/test_robots_sitemaps.py` - Existing tests
-- `src/feedsearch_crawler/__init__.py` - Public API
+- `src/berga_crawler/__init__.py` - Public API
 
 ## ✅ Checklist
 

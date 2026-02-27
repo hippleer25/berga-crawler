@@ -2,7 +2,7 @@ import pytest
 from yarl import URL
 from typing import Any
 
-from feedsearch_crawler.crawler.lib import (
+from berga_crawler.crawler.lib import (
     CrawlerPriorityQueue,
     coerce_url,
     is_same_domain,

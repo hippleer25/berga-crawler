@@ -2,8 +2,8 @@
 
 import pytest
 
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
-from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
+from berga_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.spider import FeedsearchSpider
 
 
 class TestFeedsearchSpiderFast:

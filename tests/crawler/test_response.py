@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler.request import Request
-from feedsearch_crawler.crawler.response import Response
+from berga_crawler.crawler.request import Request
+from berga_crawler.crawler.response import Response
 
 
 class TestResponseInitialization:

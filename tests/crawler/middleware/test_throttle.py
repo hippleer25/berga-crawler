@@ -5,8 +5,8 @@ import asyncio
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler.middleware.throttle import ThrottleMiddleware
-from feedsearch_crawler.crawler.request import Request
+from berga_crawler.crawler.middleware.throttle import ThrottleMiddleware
+from berga_crawler.crawler.request import Request
 
 
 class TestThrottleMiddleware:

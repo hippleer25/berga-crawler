@@ -3,11 +3,11 @@
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.crawler import Request, Response
-from feedsearch_crawler.feed_spider.favicon import Favicon
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
-from feedsearch_crawler.feed_spider.site_meta import SiteMeta
-from feedsearch_crawler.feed_spider.spider import FeedsearchSpider
+from berga_crawler.crawler import Request, Response
+from berga_crawler.feed_spider.favicon import Favicon
+from berga_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.site_meta import SiteMeta
+from berga_crawler.feed_spider.spider import FeedsearchSpider
 
 
 @pytest.mark.asyncio
@@ -189,7 +189,7 @@ class TestFeedsearchSpiderBasics:
     async def test_spider_duplicate_filter_class(self):
         """Test spider uses NoQueryDupeFilter."""
         spider = FeedsearchSpider(concurrency=1, total_timeout=1.0)
-        from feedsearch_crawler.feed_spider.dupefilter import NoQueryDupeFilter
+        from berga_crawler.feed_spider.dupefilter import NoQueryDupeFilter
 
         assert spider.duplicate_filter_class == NoQueryDupeFilter
 

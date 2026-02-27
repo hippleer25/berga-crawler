@@ -8,7 +8,7 @@ feedparser's struct_time results with dateutil's parsing of raw strings.
 import time
 from datetime import datetime
 
-from feedsearch_crawler.feed_spider.lib import parse_date_with_comparison
+from berga_crawler.feed_spider.lib import parse_date_with_comparison
 
 
 class TestDateComparison:
@@ -154,7 +154,7 @@ class TestEntryDatesWithComparison:
         """Test that entry_dates uses comparison with *_parsed fields."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         # Simulate feedparser output with both string and parsed fields
         entries = [
@@ -186,7 +186,7 @@ class TestEntryDatesWithComparison:
         """Test entry_dates with only raw date strings (JSON feeds)."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         # JSON feed entries don't have *_parsed fields
         entries = [
@@ -209,7 +209,7 @@ class TestEntryDatesWithComparison:
         """Test entry_dates accepts locale parameter."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [{"published": "2025-01-13T14:30:00Z"}]
 
@@ -227,7 +227,7 @@ class TestEntryDatesWithComparison:
         """Test that future dates are filtered out."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [
             {"published": "2025-01-13T14:30:00Z"},  # Past
@@ -245,7 +245,7 @@ class TestEntryDatesWithComparison:
         """Test graceful handling of missing date fields."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [
             {"published": "2025-01-13T14:30:00Z"},
@@ -263,7 +263,7 @@ class TestEntryDatesWithComparison:
         """Test graceful handling of invalid date values."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [
             {"published": "2025-01-13T14:30:00Z"},  # Valid
@@ -434,7 +434,7 @@ class TestEntryDatesNonEnglishFallback:
         """Non-English dates with *_parsed fields are handled correctly."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         # Simulate feedparser output for a French feed
         entries = [
@@ -465,7 +465,7 @@ class TestEntryDatesNonEnglishFallback:
         """Mixed English and non-English dates in same feed work correctly."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [
             {
@@ -503,7 +503,7 @@ class TestEntryDatesNonEnglishFallback:
         """Non-English dates without feedparser backup are skipped gracefully."""
         from datetime import date
 
-        from feedsearch_crawler.feed_spider.feed_info_parser import FeedInfoParser
+        from berga_crawler.feed_spider.feed_info_parser import FeedInfoParser
 
         entries = [
             {

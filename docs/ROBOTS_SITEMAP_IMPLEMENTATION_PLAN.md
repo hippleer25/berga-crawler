@@ -154,7 +154,7 @@ Priority 100: Regular discovered URLs (default)
 
 ### Phase 1: Crawler Changes
 
-**File:** `src/feedsearch_crawler/crawler/crawler.py`
+**File:** `src/berga_crawler/crawler/crawler.py`
 
 1. **Add methods to Crawler base class:**
 
@@ -195,7 +195,7 @@ async def parse_sitemap(self, request: Request, response: Response) -> AsyncGene
         return
 
     # Use existing parse_sitemap function from lib
-    from feedsearch_crawler.crawler.lib import parse_sitemap
+    from berga_crawler.crawler.lib import parse_sitemap
     feed_urls = parse_sitemap(response.text)
 
     logger.info(f"Found {len(feed_urls)} potential feed URLs in {response.url}")
@@ -247,7 +247,7 @@ for url in initial_urls:
 
 ### Phase 2: Spider Changes (FeedsearchSpider)
 
-**File:** `src/feedsearch_crawler/feed_spider/spider.py`
+**File:** `src/berga_crawler/feed_spider/spider.py`
 
 **No changes needed** - spider inherits `parse_robots_txt` and `parse_sitemap` from Crawler base class.
 
@@ -255,7 +255,7 @@ Spider's `parse_response` method will handle URLs discovered from sitemaps just 
 
 ### Phase 3: Improve Sitemap Parsing
 
-**File:** `src/feedsearch_crawler/crawler/lib.py`
+**File:** `src/berga_crawler/crawler/lib.py`
 
 **Current `parse_sitemap()` function (lines 348-375):**
 - ✅ Extracts `<loc>` elements
@@ -301,7 +301,7 @@ def parse_sitemap(sitemap_xml: str) -> List[str]:
 
 ### Phase 4: Update Public API
 
-**File:** `src/feedsearch_crawler/__init__.py`
+**File:** `src/berga_crawler/__init__.py`
 
 Add `respect_robots` to `search()` and `search_async()` signatures:
 

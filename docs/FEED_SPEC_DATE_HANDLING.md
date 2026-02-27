@@ -186,6 +186,6 @@ This approach:
 
 ## Implementation Files
 
-- `src/feedsearch_crawler/feed_spider/lib.py:152-209` - `parse_date_with_comparison()`
-- `src/feedsearch_crawler/feed_spider/feed_info_parser.py:455-475` - `entry_dates()`
+- `src/berga_crawler/feed_spider/lib.py:152-209` - `parse_date_with_comparison()`
+- `src/berga_crawler/feed_spider/feed_info_parser.py:455-475` - `entry_dates()`
 - `tests/feed_spider/test_date_comparison.py` - Date comparison tests

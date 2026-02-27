@@ -5,15 +5,15 @@ from unittest.mock import AsyncMock, Mock, patch
 import pytest
 from yarl import URL
 
-from feedsearch_crawler import (
+from berga_crawler import (
     SearchResult,
     search,
     search_async,
     search_with_info,
     search_async_with_info,
 )
-from feedsearch_crawler.exceptions import ErrorType, SearchError
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.exceptions import ErrorType, SearchError
+from berga_crawler.feed_spider.feed_info import FeedInfo
 
 
 class TestSearchResult:
@@ -140,7 +140,7 @@ class TestSearchError:
 class TestPublicAPIErrorHandling:
     """Test error handling in new search_with_info API."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_always_returns_list(self, mock_search_async):
         """Test that search() always returns List[FeedInfo]."""
         feeds = [FeedInfo(url=URL("https://example.com/feed.xml"))]
@@ -153,7 +153,7 @@ class TestPublicAPIErrorHandling:
         assert type(result) is list
         assert result == feeds
 
-    @patch("feedsearch_crawler.search_async_with_info")
+    @patch("berga_crawler.search_async_with_info")
     def test_search_with_info_returns_search_result(self, mock_async_with_info):
         """Test that search_with_info() returns SearchResult."""
         feeds = [FeedInfo(url=URL("https://example.com/feed.xml"))]
@@ -170,7 +170,7 @@ class TestPublicAPIErrorHandling:
     @pytest.mark.asyncio
     async def test_search_async_always_returns_list(self):
         """Test that search_async() always returns List[FeedInfo]."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [FeedInfo(url=URL("https://example.com/feed.xml"))]
             mock_spider.crawl = AsyncMock()
@@ -185,7 +185,7 @@ class TestPublicAPIErrorHandling:
     @pytest.mark.asyncio
     async def test_search_async_with_info_returns_search_result(self):
         """Test that search_async_with_info() returns SearchResult."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [FeedInfo(url=URL("https://example.com/feed.xml"))]
             mock_spider.crawl = AsyncMock()
@@ -203,7 +203,7 @@ class TestPublicAPIErrorHandling:
     @pytest.mark.asyncio
     async def test_search_async_with_info_includes_stats(self):
         """Test that search_async_with_info() includes stats when requested."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -226,8 +226,8 @@ class TestRootURLErrorTracking:
     @pytest.mark.asyncio
     async def test_spider_tracks_root_url_error_404(self):
         """Test that spider records HTTP 404 errors for root URLs."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://nonexistent.example.com")
@@ -259,8 +259,8 @@ class TestRootURLErrorTracking:
     @pytest.mark.asyncio
     async def test_spider_tracks_root_url_error_500(self):
         """Test that spider records HTTP 500 errors for root URLs."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -288,8 +288,8 @@ class TestRootURLErrorTracking:
     @pytest.mark.asyncio
     async def test_spider_no_error_on_success(self):
         """Test that spider has no root_error on successful response."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -316,8 +316,8 @@ class TestRootURLErrorTracking:
     @pytest.mark.asyncio
     async def test_spider_no_error_for_discovered_url_failure(self):
         """Test that discovered URL failures don't create root_error."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -351,8 +351,8 @@ class TestErrorTypePreservation:
     @pytest.mark.asyncio
     async def test_dns_error_type_preserved(self):
         """Test that DNS errors are categorized correctly."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://nonexistent.example.com")
@@ -381,8 +381,8 @@ class TestErrorTypePreservation:
     @pytest.mark.asyncio
     async def test_ssl_error_type_preserved(self):
         """Test that SSL errors are categorized correctly."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -411,8 +411,8 @@ class TestErrorTypePreservation:
     @pytest.mark.asyncio
     async def test_timeout_error_type_preserved(self):
         """Test that timeout errors are categorized correctly."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -441,8 +441,8 @@ class TestErrorTypePreservation:
     @pytest.mark.asyncio
     async def test_connection_error_type_preserved(self):
         """Test that connection errors are categorized correctly."""
-        from feedsearch_crawler.crawler import Request, Response
-        from feedsearch_crawler.feed_spider import FeedsearchSpider
+        from berga_crawler.crawler import Request, Response
+        from berga_crawler.feed_spider import FeedsearchSpider
 
         spider = FeedsearchSpider(concurrency=1, total_timeout=0.5)
         root_url = URL("https://example.com")
@@ -472,7 +472,7 @@ class TestErrorTypePreservation:
 class TestBackwardCompatibility:
     """Test backward compatibility with existing code patterns."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_existing_code_pattern_iteration(self, mock_search_async):
         """Test that existing code using iteration still works."""
         feeds = [
@@ -490,7 +490,7 @@ class TestBackwardCompatibility:
             assert len(feed_urls) == 2
             assert "https://example.com/feed1.xml" in feed_urls
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_existing_code_pattern_if_check(self, mock_search_async):
         """Test that existing code using if check still works."""
         # Test with feeds
@@ -517,7 +517,7 @@ class TestBackwardCompatibility:
             else:
                 assert False, "Should have no feeds"
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_existing_code_pattern_len_check(self, mock_search_async):
         """Test that existing code using len() still works."""
         feeds = [
@@ -531,7 +531,7 @@ class TestBackwardCompatibility:
             # Existing code pattern: len(feeds)
             assert len(result) == 2
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_existing_code_pattern_indexing(self, mock_search_async):
         """Test that existing code using indexing still works."""
         feeds = [FeedInfo(url=URL("https://example.com/feed.xml"))]
@@ -544,7 +544,7 @@ class TestBackwardCompatibility:
             assert isinstance(first_feed, FeedInfo)
             assert str(first_feed.url) == "https://example.com/feed.xml"
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_isinstance_check_works(self, mock_search_async):
         """Test that isinstance(result, list) works."""
         feeds = [FeedInfo(url=URL("https://example.com/feed.xml"))]

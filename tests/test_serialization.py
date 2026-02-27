@@ -10,9 +10,9 @@ import jsonschema
 import pytest
 from yarl import URL
 
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
-from feedsearch_crawler.feed_spider.site_meta import SiteMeta
-from feedsearch_crawler.schemas import FEEDINFO_SCHEMA, SITEMETA_SCHEMA
+from berga_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.site_meta import SiteMeta
+from berga_crawler.schemas import FEEDINFO_SCHEMA, SITEMETA_SCHEMA
 
 
 class TestFeedInfoSerialization:

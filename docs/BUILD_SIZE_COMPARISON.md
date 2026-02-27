@@ -21,8 +21,8 @@ ls -lh dist/*.whl
 
 **Expected output:**
 ```
-feedsearch_crawler-1.0.3-py3-none-any.whl    ~50-60 KB
-feedsearch_crawler-1.0.3.tar.gz             ~70-80 KB
+berga_crawler-1.0.3-py3-none-any.whl    ~50-60 KB
+berga_crawler-1.0.3.tar.gz             ~70-80 KB
 ```
 
 ### Dependencies (from pyproject.toml)
@@ -86,7 +86,7 @@ feedsearch-crawler (60 KB)
 
 **Expected output:**
 ```
-feedsearch_crawler-2.0.0-py3-none-any.whl    ~55-65 KB (+5-10 KB)
+berga_crawler-2.0.0-py3-none-any.whl    ~55-65 KB (+5-10 KB)
 ```
 
 The code itself wouldn't grow much, but dependency installation would be significantly larger.
@@ -281,7 +281,7 @@ ls -lh dist/
 # Create virtual env and measure
 python -m venv test_env
 source test_env/bin/activate
-pip install ./dist/feedsearch_crawler-*.whl
+pip install ./dist/berga_crawler-*.whl
 du -sh test_env/lib/python3.12/site-packages/
 
 # Measure with Pydantic (hypothetical)

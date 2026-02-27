@@ -5,8 +5,8 @@ from unittest.mock import Mock, patch
 from urllib.robotparser import RobotFileParser
 from yarl import URL
 
-from feedsearch_crawler.crawler.middleware.robots import RobotsMiddleware
-from feedsearch_crawler.crawler.request import Request
+from berga_crawler.crawler.middleware.robots import RobotsMiddleware
+from berga_crawler.crawler.request import Request
 
 
 class TestRobotsMiddlewareBasic:

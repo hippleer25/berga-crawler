@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 
-from feedsearch_crawler import (
+from berga_crawler import (
     SearchResult,
     output_opml,
     search,
@@ -13,13 +13,13 @@ from feedsearch_crawler import (
     search_with_info,
     sort_urls,
 )
-from feedsearch_crawler.feed_spider.feed_info import FeedInfo
+from berga_crawler.feed_spider.feed_info import FeedInfo
 
 
 class TestSearchFunction:
     """Test the synchronous search function."""
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_single_url_string(self, mock_search_async):
         """Test search with a single URL string."""
         mock_feeds = [
@@ -33,7 +33,7 @@ class TestSearchFunction:
         assert result == mock_feeds
         assert isinstance(result, list)
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_with_try_urls(self, mock_search_async):
         """Test search with try_urls parameter."""
         mock_feeds = [
@@ -46,7 +46,7 @@ class TestSearchFunction:
 
         assert result == mock_feeds
 
-    @patch("feedsearch_crawler.search_async")
+    @patch("berga_crawler.search_async")
     def test_search_list_of_urls(self, mock_search_async):
         """Test search with a list of URLs."""
         mock_feeds = [
@@ -67,7 +67,7 @@ class TestSearchAsyncFunction:
     @pytest.mark.asyncio
     async def test_search_async_single_url(self):
         """Test async search with a single URL (default: returns list)."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [
                 FeedInfo(url="https://example.com/feed.xml", title="Test", score=10)
@@ -85,7 +85,7 @@ class TestSearchAsyncFunction:
     @pytest.mark.asyncio
     async def test_search_async_with_kwargs(self):
         """Test async search with additional keyword arguments."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
@@ -106,7 +106,7 @@ class TestSearchAsyncFunction:
 class TestSearchWithInfoFunction:
     """Test the synchronous search_with_info function."""
 
-    @patch("feedsearch_crawler.search_async_with_info")
+    @patch("berga_crawler.search_async_with_info")
     def test_search_with_info_returns_search_result(self, mock_search_async_with_info):
         """Test search_with_info returns SearchResult."""
         mock_result = SearchResult(
@@ -125,7 +125,7 @@ class TestSearchWithInfoFunction:
         assert len(result.feeds) == 1
         assert result.root_error is None
 
-    @patch("feedsearch_crawler.search_async_with_info")
+    @patch("berga_crawler.search_async_with_info")
     def test_search_with_info_with_stats(self, mock_search_async_with_info):
         """Test search_with_info with statistics."""
         mock_result = SearchResult(
@@ -149,7 +149,7 @@ class TestSearchAsyncWithInfoFunction:
     @pytest.mark.asyncio
     async def test_search_async_with_info_returns_search_result(self):
         """Test search_async_with_info returns SearchResult."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = [
                 FeedInfo(url="https://example.com/feed.xml", title="Test", score=10)
@@ -168,7 +168,7 @@ class TestSearchAsyncWithInfoFunction:
     @pytest.mark.asyncio
     async def test_search_async_with_info_with_stats(self):
         """Test search_async_with_info with statistics."""
-        with patch("feedsearch_crawler.FeedsearchSpider") as mock_spider_class:
+        with patch("berga_crawler.FeedsearchSpider") as mock_spider_class:
             mock_spider = Mock()
             mock_spider.items = []
             mock_spider.crawl = AsyncMock()
